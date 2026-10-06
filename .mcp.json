@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "agentic": {
+      "command": "python",
+      "args": [
+        "-m",
+        "agentic_platform.mcp_server"
+      ],
+      "env": {
+        "ASANA_TOKEN": "${ASANA_TOKEN:-}",
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN:-}",
+        "GOOGLE_ACCESS_TOKEN": "${GOOGLE_ACCESS_TOKEN:-}"
+      }
+    }
+  }
+}

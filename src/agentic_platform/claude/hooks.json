@@ -1,0 +1,85 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "Bash|PowerShell|Grep|Glob",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python -m agentic_platform.hooks.guarda_busca"
+        }
+      ]
+    },
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python -m agentic_platform.hooks.observabilidade"
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python -m agentic_platform.hooks.observabilidade"
+        }
+      ]
+    }
+  ],
+  "SubagentStop": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python -m agentic_platform.hooks.observabilidade"
+        }
+      ]
+    }
+  ],
+  "PreCompact": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python -m agentic_platform.hooks.observabilidade"
+        }
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python -m agentic_platform.hooks.portao_entrega"
+        }
+      ]
+    }
+  ],
+  "SessionStart": [
+    {
+      "matcher": "compact|resume",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python -m agentic_platform.hooks.retomada"
+        }
+      ]
+    }
+  ],
+  "PostToolUseFailure": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python -m agentic_platform.hooks.observabilidade"
+        }
+      ]
+    }
+  ]
+}
