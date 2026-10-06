@@ -26,6 +26,7 @@ Com o log de tudo isso, apareceram os buracos:
 | Achado "óbvio" que estava errado virava correção na causa errada | subagente `cetico`: tenta derrubar cada achado antes de virar código |
 
 Nenhuma dessas regras veio de achismo. Primeiro medi, depois criei a regra.
+O que deu errado no caminho está no [diário de bordo](DIARIO.md).
 
 ## Como funciona
 
