@@ -7,11 +7,29 @@
 ![MCP](https://img.shields.io/badge/MCP-server-8A2BE2)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+![Demo: o agente tenta encerrar, o portão de entrega segura, o teste roda, o recibo sai e as métricas aparecem](docs/demo.gif)
+
 Uso agentes de IA todo dia pra resolver demanda de sustentação: ler o card, achar a causa, corrigir, provar.
 O problema nunca foi o agente escrever código. Foi ele dizer "pronto" sem ter terminado.
 
 Este repositório é a versão aberta da plataforma que montei no meu trabalho com o Claude Code.
 A ideia central é simples: **medir o que o agente faz de verdade e colocar um portão onde ele erra.**
+
+## Em 30 segundos
+
+- **O problema.** Agente de IA que declara "pronto" sem terminar. Medindo a versão interna dessa plataforma (282 subagentes, 122 workflows), o recibo de validação foi pulado em 26 de 39 rodadas que editaram código.
+- **A regra.** O agente não encerra sem um recibo com evidência de teste real — é o `portao_entrega`, o hook do GIF acima. Medir primeiro, regra depois.
+- **O resto do sistema.** Skills que investigam com hipóteses em paralelo, um subagente cético que tenta derrubar cada achado, validação que roda os mesmos casos antes e depois do diff, e um servidor MCP próprio (Asana, Sheets, Slack) em que mensagem só sai com aprovação humana.
+- **A prova.** 44 testes que sobem cada hook como processo separado e conversam com ele igual o Claude Code faz. Um comando roda tudo na sua máquina:
+
+```bat
+git clone https://github.com/amonmelo/agentic-dev-platform
+cd agentic-dev-platform
+pip install -e ".[dev]"
+verificar.bat
+```
+
+Os detalhes, com os números medidos, estão em [Por que existe](#por-que-existe).
 
 ## Por que existe
 
@@ -165,6 +183,8 @@ Esse teste achou dois problemas que os testes unitários não pegavam:
 pip install -e ".[dev]"
 pytest -q
 ```
+
+No Windows, `verificar.bat` na raiz faz a verificação local inteira em um comando: pytest + demo de métricas.
 
 44 testes. Os hooks rodam como processo separado com o JSON no stdin, igual o Claude Code faz.
 Os do MCP sobem o servidor e conversam com ele pelo protocolo, via stdio.
